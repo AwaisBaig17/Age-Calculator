@@ -1,6 +1,6 @@
 {
   "name": "@awaisbaig/age-calculator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Universal age calculator library for JavaScript/TypeScript - works with React, Angular, Vue, and all JS frameworks",
   "keywords": [
     "age-calculator",
