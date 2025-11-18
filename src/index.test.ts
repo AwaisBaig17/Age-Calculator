@@ -4,8 +4,8 @@ import { AgeCalculator } from './index';
 describe('AgeCalculator', () => {
   describe('getAge', () => {
     it('should calculate age correctly', () => {
-      const dob = new Date('1990-01-01');
-      const currentDate = new Date('2024-07-04');
+      const dob = new Date(1990, 0, 1); // January 1, 1990
+      const currentDate = new Date(2024, 6, 4); // July 4, 2024
       const age = AgeCalculator.getAge(dob, currentDate);
       
       expect(age.years).toBe(34);
@@ -14,8 +14,8 @@ describe('AgeCalculator', () => {
     });
 
     it('should handle same date', () => {
-      const dob = new Date('2024-01-01');
-      const currentDate = new Date('2024-01-01');
+      const dob = new Date(2024, 0, 1);
+      const currentDate = new Date(2024, 0, 1);
       const age = AgeCalculator.getAge(dob, currentDate);
       
       expect(age.years).toBe(0);
@@ -41,39 +41,39 @@ describe('AgeCalculator', () => {
 
   describe('getAgeIn', () => {
     it('should calculate age in years', () => {
-      const dob = new Date('1990-01-01');
-      const currentDate = new Date('2024-07-04');
+      const dob = new Date(1990, 0, 1);
+      const currentDate = new Date(2024, 6, 4);
       const years = AgeCalculator.getAgeIn(dob, 'years', currentDate);
       
       expect(years).toBe(34);
     });
 
     it('should calculate age in months', () => {
-      const dob = new Date('1990-01-01');
-      const currentDate = new Date('2024-07-04');
+      const dob = new Date(1990, 0, 1);
+      const currentDate = new Date(2024, 6, 4);
       const months = AgeCalculator.getAgeIn(dob, 'months', currentDate);
       
       expect(months).toBe(414); // 34 years * 12 + 6 months
     });
 
     it('should calculate age in weeks', () => {
-      const dob = new Date('1990-01-01');
-      const currentDate = new Date('1990-01-15');
+      const dob = new Date(1990, 0, 1);
+      const currentDate = new Date(1990, 0, 15);
       const weeks = AgeCalculator.getAgeIn(dob, 'weeks', currentDate);
       
       expect(weeks).toBe(2);
     });
 
     it('should calculate age in days', () => {
-      const dob = new Date('1990-01-01');
-      const currentDate = new Date('1990-01-11');
+      const dob = new Date(1990, 0, 1);
+      const currentDate = new Date(1990, 0, 11);
       const days = AgeCalculator.getAgeIn(dob, 'days', currentDate);
       
       expect(days).toBe(10);
     });
 
     it('should throw error for invalid unit', () => {
-      const dob = new Date('1990-01-01');
+      const dob = new Date(1990, 0, 1);
       
       expect(() => {
         AgeCalculator.getAgeIn(dob, 'invalid' as any);
@@ -83,15 +83,15 @@ describe('AgeCalculator', () => {
 
   describe('isAdult', () => {
     it('should return true for adult', () => {
-      const dob = new Date('2000-01-01');
-      const currentDate = new Date('2024-01-01');
+      const dob = new Date(2000, 0, 1);
+      const currentDate = new Date(2024, 0, 1);
       
       expect(AgeCalculator.isAdult(dob, currentDate)).toBe(true);
     });
 
     it('should return false for minor', () => {
-      const dob = new Date('2010-01-01');
-      const currentDate = new Date('2024-01-01');
+      const dob = new Date(2010, 0, 1);
+      const currentDate = new Date(2024, 0, 1);
       
       expect(AgeCalculator.isAdult(dob, currentDate)).toBe(false);
     });
@@ -99,8 +99,8 @@ describe('AgeCalculator', () => {
 
   describe('getNextBirthday', () => {
     it('should return next birthday in current year', () => {
-      const dob = new Date('1990-12-25');
-      const currentDate = new Date('2024-01-01');
+      const dob = new Date(1990, 11, 25); // December 25, 1990
+      const currentDate = new Date(2024, 0, 1); // January 1, 2024
       const nextBirthday = AgeCalculator.getNextBirthday(dob, currentDate);
       
       expect(nextBirthday.getFullYear()).toBe(2024);
@@ -109,8 +109,8 @@ describe('AgeCalculator', () => {
     });
 
     it('should return next birthday in next year if already passed', () => {
-      const dob = new Date('1990-01-01');
-      const currentDate = new Date('2024-06-01');
+      const dob = new Date(1990, 0, 1); // January 1, 1990
+      const currentDate = new Date(2024, 5, 1); // June 1, 2024
       const nextBirthday = AgeCalculator.getNextBirthday(dob, currentDate);
       
       expect(nextBirthday.getFullYear()).toBe(2025);
@@ -121,8 +121,8 @@ describe('AgeCalculator', () => {
 
   describe('getDaysUntilNextBirthday', () => {
     it('should calculate days until next birthday', () => {
-      const dob = new Date('1990-01-10');
-      const currentDate = new Date('2024-01-01');
+      const dob = new Date(1990, 0, 10); // January 10
+      const currentDate = new Date(2024, 0, 1); // January 1
       const days = AgeCalculator.getDaysUntilNextBirthday(dob, currentDate);
       
       expect(days).toBe(9);
@@ -131,19 +131,19 @@ describe('AgeCalculator', () => {
 
   describe('getZodiacSign', () => {
     it('should return correct zodiac sign for Aries', () => {
-      expect(AgeCalculator.getZodiacSign(new Date('1990-04-01'))).toBe('Aries');
+      expect(AgeCalculator.getZodiacSign(new Date(1990, 3, 1))).toBe('Aries');
     });
 
     it('should return correct zodiac sign for Taurus', () => {
-      expect(AgeCalculator.getZodiacSign(new Date('1990-05-01'))).toBe('Taurus');
+      expect(AgeCalculator.getZodiacSign(new Date(1990, 4, 1))).toBe('Taurus');
     });
 
     it('should return correct zodiac sign for Gemini', () => {
-      expect(AgeCalculator.getZodiacSign(new Date('1990-06-01'))).toBe('Gemini');
+      expect(AgeCalculator.getZodiacSign(new Date(1990, 5, 1))).toBe('Gemini');
     });
 
     it('should return correct zodiac sign for Leo', () => {
-      expect(AgeCalculator.getZodiacSign(new Date('1990-08-01'))).toBe('Leo');
+      expect(AgeCalculator.getZodiacSign(new Date(1990, 7, 1))).toBe('Leo');
     });
 
     it('should throw error for invalid date', () => {
